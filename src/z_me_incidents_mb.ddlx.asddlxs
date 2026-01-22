@@ -36,43 +36,49 @@ annotate entity Z_C_INCIDENTS_MB with
   @UI.hidden: true
   IncUUID;
 
+  @EndUserText.label: 'Incident ID'
   @UI: { lineItem: [{ position: 20,
                       importance: #MEDIUM }],
          selectionField: [{ position: 20 }],
          identification: [{ position: 20 }] }
   IncidentId;
 
+  @EndUserText.label: 'Title'
   @UI: { lineItem: [{ position: 30,
                       importance: #LOW }],
          selectionField: [{ exclude: true }], //Sin filtros de búsqueda
          identification: [{ position: 30 }] }
   Title;
 
+  @EndUserText.label: 'Incident Description'
   @UI: { lineItem: [{ position: 40,
                       importance: #LOW }],
          selectionField: [{ position: 40 }],
          identification: [{ position: 40 }] }
   Description;
 
+  @EndUserText.label: 'Incident Status'
   @UI: { lineItem: [{position: 50,
                      importance: #LOW }],
          selectionField: [{ position: 50 }],
          identification: [{ position: 50 }] }
   Status;
 
+  @EndUserText.label: 'Incident Priority'
   @UI: { lineItem: [{position: 60,
                      importance: #LOW }],
          selectionField: [{ position: 60 }],
          identification: [{ position: 60 }] }
   Priority;
 
+  @EndUserText.label: 'Created Date'
   @UI: { lineItem: [{position: 70,
                      importance: #LOW }],
          selectionField: [{ position: 70 }],
          identification: [{ position: 70 }] }
   CreationDate;
 
-
+  @EndUserText.label: 'Changed Date'
   @UI: { lineItem: [{position: 80,
                      importance: #LOW }],
          selectionField: [{ position: 80 }],

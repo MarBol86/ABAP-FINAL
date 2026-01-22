@@ -1,0 +1,90 @@
+managed implementation in class zbp_r_incidents_mb unique;
+strict ( 2 );
+with draft;
+
+define behavior for Z_R_INCIDENTS_MB alias Incidents
+persistent table zdt_inct_mb
+draft table zdt_inct_mbd
+lock master
+total etag LastChangedAt
+etag master LocalLastChangedAt
+authorization master ( global, instance )
+
+
+{
+  create;
+  update;
+  delete;
+
+  association _History { create ( features : instance ); with draft; }
+
+  field ( numbering : managed, readonly ) IncUUID;
+  field ( readonly ) incidentid, status, ChangedDate, localcreatedby, localcreatedat, locallastchangedby, locallastchangedat, lastchangedat;
+  field ( mandatory ) title, description, priority;
+
+  action ( features : instance, authorization : update ) changeStatus parameter ZAE_STATUS_OBSERVATION_MB result [1] $self;
+
+
+
+  determination createHistory on save { create; }
+  determination setvalues on modify { create; }
+
+  side effects
+  {
+    action changeStatus affects $self;
+  }
+  draft action Resume;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft determine action Prepare
+  {
+  }
+
+  mapping for zdt_inct_mb
+    {
+      IncUUID            = inc_uuid;
+      IncidentId         = incident_id;
+      Title              = title;
+      Description        = description;
+      Status             = status;
+      Priority           = priority;
+      CreationDate       = creation_date;
+      ChangedDate        = changed_date;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}
+
+define behavior for Z_R_HISTORY_MB alias Histories
+persistent table zdt_inct_h_mb
+draft table zdt_inct_h_mbd
+etag master LocalLastChangedAt
+lock dependent by _Incidents
+authorization dependent by _Incidents
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( numbering : managed, readonly ) HisUUID;
+  field ( readonly ) incuuid, localcreatedby, localcreatedat, locallastchangedby, locallastchangedat, lastchangedat;
+  association _Incidents { with draft; }
+
+  mapping for zdt_inct_h_mb
+    {
+      HisUUID            = his_uuid;
+      IncUUID            = inc_uuid;
+      HisId              = his_id;
+      PreviousStatus     = previous_status;
+      NewStatus          = new_status;
+      Text               = text;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}

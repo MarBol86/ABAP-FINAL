@@ -1,0 +1,5 @@
+CLASS zbp_r_incidents_mb DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF z_r_incidents_mb.
+ENDCLASS.
+
+CLASS zbp_r_incidents_mb IMPLEMENTATION.
+ENDCLASS.
