@@ -19,19 +19,22 @@ authorization master ( global, instance )
   association _History { create ( features : instance ); with draft; }
 
   field ( numbering : managed, readonly ) IncUUID;
-  field ( readonly ) incidentid, status, ChangedDate, localcreatedby, localcreatedat, locallastchangedby, locallastchangedat, lastchangedat;
+  field ( readonly ) incidentid, status, ChangedDate, localcreatedby, localcreatedat, locallastchangedby, locallastchangedat, lastchangedat, CreationDate;
   field ( mandatory ) title, description, priority;
 
   action ( features : instance, authorization : update ) changeStatus parameter ZAE_STATUS_OBSERVATION_MB result [1] $self;
 
-
+  validation validateMandatory on save { create; field title, description, priority; }
 
   determination createHistory on save { create; }
   determination setvalues on modify { create; }
 
+  determine action validateMandatoryFields { validation validateMandatory;}
+
   side effects
   {
     action changeStatus affects $self;
+    determine action validateMandatoryFields executed on field title, field description, field priority affects messages;
   }
   draft action Resume;
   draft action Edit;

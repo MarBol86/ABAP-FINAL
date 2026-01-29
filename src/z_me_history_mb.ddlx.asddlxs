@@ -1,7 +1,7 @@
 @Metadata.layer: #CORE
 @UI.presentationVariant: [{
     sortOrder: [{
-        by: 'HisUUID',
+        by: 'HisId',
         direction: #ASC
     }],
     visualizations: [{
@@ -10,10 +10,10 @@
 
 @UI.headerInfo: {
     typeName: 'History',
-    typeNamePlural: 'Incidents',
+    typeNamePlural: 'Histories',
   title: {
         type: #STANDARD,
-        criticalityRepresentation: #WITHOUT_ICON,
+//        criticalityRepresentation: #WITHOUT_ICON,
         value: 'HisUUID'
     } }
 @UI.createHidden: true
@@ -35,23 +35,28 @@ annotate entity Z_C_HISTORY_MB with
                       importance: #MEDIUM }],
          selectionField: [{ position: 20 }],
          identification: [{ position: 20 }] }
+  @EndUserText.label: 'History ID'
   HisId;
 
   @UI: { lineItem: [{ position: 30,
                       importance: #LOW }],
          selectionField: [{ position: 30 }],
          identification: [{ position: 30 }] }
+  @EndUserText.label: 'Previous Status'
   PreviousStatus;
 
   @UI: { lineItem: [{ position: 40,
                       importance: #LOW }],
          selectionField: [{ position: 40 }],
          identification: [{ position: 40 }] }
+  @EndUserText.label: 'Incident Status'
   NewStatus;
+
   @UI: { lineItem: [{ position: 50,
                       importance: #LOW }],
          selectionField: [{ position: 50 }],
          identification: [{ position: 50 }] }
+  @EndUserText.label: 'Observation'
   Text;
 
   @UI.hidden: true

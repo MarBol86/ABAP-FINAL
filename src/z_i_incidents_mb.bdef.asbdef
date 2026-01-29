@@ -1,8 +1,7 @@
-projection;
-strict ( 2 );
+interface;
 use draft;
 
-define behavior for Z_C_INCIDENTS_MB alias Incidents
+define behavior for Z_I_INCIDENTS_MB alias Incidents
 {
   use create;
   use update;
@@ -20,7 +19,7 @@ define behavior for Z_C_INCIDENTS_MB alias Incidents
   use association _History { create; with draft; }
 }
 
-define behavior for Z_C_HISTORY_MB alias Histories
+define behavior for Z_I_HISTORY_MB alias Histories
 {
   use update;
   use delete;
